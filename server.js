@@ -38,6 +38,21 @@ app.get('/sensado', (req, res)=> {
     })
 })
 
+// add data
+app.post('/add', (req, res) => {
+    const sql = 'INSERT INTO sensores1 SET ?'
+
+    const customerObj = {
+        temperatura: req.body.temperatura,
+        humedad: req.body.humedad
+    };
+
+    dbconnection.query(sql, customerObj, error => {
+        if(error) throw error;
+        res.send('Data created!')
+    })
+})
+
 // check connect
 dbconnection.connect((err) => {
     if (err) {
